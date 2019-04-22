@@ -3,8 +3,61 @@
 ---
 
 ```javascript
-/hello\sworld/i
+/hel{2}o\sworld/i
 ```
 
 ---
+
+regex => string/text
+math => number
+
+---
+
+match
+valid
+replace
+
+---
+
+match
+
+"say hello world".match(/hello\s(world)/) => ["hello world", "world"]
+
+---
+
+valid
+
+/hello\sworld/.test("say hello world") => true
+
+/hello\sworld/.test("say hello fulano") => false
+
+---
+
+replace
+
+"say hello world".replace(/world/, "fulano") => "say hello fulano"
+
+---
+
+disclaimer about "valid"
+
+<Appear>
+  <li>structural !== substantial</li>
+</Appear>
+
+---
+
+// Example about CPF
+
+const cpf = /[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}/
+
+cpf.test("443.443.443-23") => true
+cpf.test("4432.4423.443-23") => false
+
+
+
+
+
+
+
 
