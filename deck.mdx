@@ -198,7 +198,6 @@ value.replace(/^(hello)\s([a-z]*)$/gm, "$1 wooow")
     <li>Quantifiers</li>
     <li>Group</li>
     <li>Characters</li>
-    <li>General Tokens</li>
   </Appear>
 </ul>
 
@@ -260,17 +259,29 @@ value.replace(/^(hello)\s([a-z]*)$/gm, "$1 wooow")
 
 ---
 
+# Pattern - Quantifiers
 
-Pattern - Quantifiers
+`a* a+ a{3} a{3,} a{3, 6}` 
 
-```javascript
-a*
-a+
-a{3}
-a{3,}
-a{3,6}
-a*?
-```
+---
+
+# Quantifiers `a*` `a+` `a?`
+
+`/ba*/g` = aaaaa3`ba`3aaaaaa3`baaaaaa`3`b` 
+
+`/ba+/g` = aaaaa3`ba`3aaaaaa3`baaaaaa`3b
+
+`/ba?/g` = aaaaa3`ba`3aaaaaa3`ba`aaaaa3b
+
+---
+
+# Quantifiers `a{3}` `a{3,}` `a{3,6}`
+
+`/a{3}/g` = a aa `aaa` `aaa`aa
+
+`/a{3,}/g` = a aa `aaa` `aaaaa`
+
+`/a{3,4}/g` = a aa `aaa` `aaaa`a
 
 ---
 
@@ -296,18 +307,6 @@ Pattern - Characters
 [^a]
 [^a-z]
 [a-zA-Z]
-```
-
-
----
-
-Pattern - General Tokens
-
-```javascript
-\t
-\n
-\r
-\0
 ```
 
 ---
