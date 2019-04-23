@@ -271,11 +271,11 @@ value.replace(/^(hello)\s([a-z]*)$/gm, "$1 wooow")
 
 `/ba+/g` = aaaaa3`ba`3aaaaaa3`baaaaaa`3b
 
-`/ba?/g` = aaaaa3`ba`3aaaaaa3`ba`aaaaa3b
+`/ba?/g` = aaaaa3`ba`3aaaaaa3`ba`aaaaa3`b`
 
 ---
 
-# Quantifiers `a{3}` `a{3,}` `a{3,6}`
+# Quantifiers `a{3}` `a{3,}`
 
 `/a{3}/g` = a aa `aaa` `aaa`aa
 
@@ -285,41 +285,119 @@ value.replace(/^(hello)\s([a-z]*)$/gm, "$1 wooow")
 
 ---
 
-Pattern - Group
+# Pattern - Characters
 
-```javascript
-(a|b)
-(?:...)
-(?=...)
-(?!...)
-(?<=...)
-(?<!...)
-(?<name>...)
+`[a] [a-z] [^a-z] [a-zA-Z] [0-9]`
+
+---
+
+# Characters `[a]` `[!]` `[@]`
+
+`/b[aei]/g` = `ba` `ba`a `be` `be`e `bi` bo bu
+
+`/b[aei]+/g` = `ba` `baa` `be` `bee` `bi` bo bu
+
+`/bah[?!]/g` = bah `bah?` `bah!` bah
+
+---
+
+# Characters `[^a]` `[^!]` `[^@]`
+
+`/b[^aei]/g` = ba baa be bee bi `bo`o `bu`u
+
+`/b[^aei]+/g` = ba baa be bee bi `boo` `buu`
+
+`/bah[^?!]/g` = `bah` bah? bah! `bah`
+
+---
+
+# Characters `[a-z]` `[A-Z]` `[0-9]`
+
+`/h[a-z]* w[a-z]*/g` = `hello world` 1000
+
+`/h[a-z]* w[a-z]* [0-9]*/g` = `hello world 1000`
+
+`/h[^a-z]* w[^a-z]* [0-9]*/g` = hi world 100 `h123 w123 10`
+
+---
+
+# Pattern - Group
+
+`(a|b) (?:) (?=) (?!) (?<=) (?<!)`
+
+---
+
+`short intro:` about group
+
+---
+
+```javascript Group
+/hello world/.test('hello world') => true
+/hello (world)/.test('hello world') => true
+
+"hello world".exec(/hello world/) => ["hello world"]
+"hello world".exec(/hello (world)/) => ["hello world", "world"]
+
+"hello world".replace(/hello world/, "hi world") => "hi world"
+"hello world".replace(/hello (\w*)/, "hi $1") => "hi world"
+"hello bar".replace(/hello (\w*)/, "hi $1") => "hi bar"
+----
+* > example
+1:2 > test
+4 > without group
+5 > with group
+5[10:15] > result
+7 > without group
+8:9 > with group
+8[8] > replace with group
+8[1],9[1] > dynamic text
+8[13], 9[13] > dynamic result
 ```
 
 ---
 
-Pattern - Characters
+# Group `(a|b)`
 
-```javascript
-[a]
-[a-z]
-[^a]
-[^a-z]
-[a-zA-Z]
-```
+`/hi (foo|bar)/g` = hi boo `hi foo` `hi bar`
+
 
 ---
 
-BOOOM
+# Group `(?=)` `(?!)`
 
-```javascript
-<regex email>
-```
+`/foo (?=bar)/g` = `foo` bar foo bz `foo` bar
 
---- 
+`/foo (?!bar)/g` = foo bar `foo` bz foo bar
 
-XRegExp
+---
+
+# Group `(?<=)` `(?<!)`
+
+`/(?<=foo) bar/g` = foo `bar` for bar foo `bar`
+
+`/(?<!foo) bar/g` = foo bar for `bar` foo bar
+
+<Appear>
+  <div>is not yet supported on all browsers</div>
+</Appear>
+
+---
+
+`Plus group:` `(?<name>)`
+
+`/hello (?<planet>\\w*/g`
+
+---
+
+# BOOOM
+
+`/^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(
+".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA
+-Z-0-9]+.)+[a-zA-Z]{2,}))$/`
+
+---
+
+# XRegExp
 
 <Appear>
   <li>!image</li>
