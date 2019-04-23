@@ -1,184 +1,323 @@
-# Regex
+export { hack as theme } from 'mdx-deck/themes'
+import { Appear, Notes } from 'mdx-deck'
+import { Box } from 'grid-styled'
+
+import { Invert, Split } from 'mdx-deck/layouts'
+
+export { components } from "mdx-deck-code-surfer"
+
+
+`/hel{2}o\\sworld/i`
 
 ---
 
-```javascript
-/hel{2}o\sworld\sof\sRegExp/i
-```
----
-
-disclaimer: only javascript
+![](https://media.giphy.com/media/l4HnYzDSLq9Vn0Csg/giphy.gif)
 
 ---
 
-regex => string/text
-math => number
+`DISCLAIMER:` only javascript
 
 ---
 
-match
-valid
-replace
+# regex => string/text
+
+# math => number
 
 ---
-
-match
-
-"say hello world".exec(/hello\s(world)/) => ["hello world", "world"]
-
----
-
-valid
-
-/hello\sworld/.test("say hello world") => true
-
-/hello\sworld/.test("say hello fulano") => false
-
----
-
-replace
-
-"say hello world".replace(/world/, "fulano") => "say hello fulano"
-
----
-
-disclaimer about "valid"
-
+  
+<Box>
+  <h1>match</h1>
+</Box>
 <Appear>
-  <li>structural !== substantial</li>
+  <Box>
+    <h1>valid</h1>
+  </Box>
+  <Box>
+    <h1>replace</h1>
+  </Box>
 </Appear>
 
 ---
 
-// Example about CPF
+```javascript Match
+"say hello world".exec(/hello\\s(world)/) => ["hello world", "world"]
+----
+* > exec
+1[0] > text/string
+1[4] > regexp
+1[1:3, 5] > exec/match
+1[8:14] > result
+```
 
+---
+
+
+```javascript Valid
+/hello\\sworld/.test("say hello world") => true
+
+/hello\\sworld/.test("say hello fulano") => false
+----
+* > valid
+1[0] > regex
+1[4] > value
+1[1:3, 5] > test
+1 > true
+3 > false
+```
+---
+
+```javascript Replace
+
+"say hello world".replace(/world/, "fulano") => "say hello fulano"
+----
+* > example
+1[0] > value
+1[4] > regexp - value to replace
+1[7] > new value
+1[12] > result
+
+```
+
+---
+
+`other disclaimer:` about "valid/test"
+
+<Appear>
+  <div>structural !== substantial</div>
+</Appear>
+
+---
+
+```javascript Example about CPF
 const cpf = /[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}/
 
 cpf.test("443.443.443-23") => true
 cpf.test("4432.4423.443-23") => false
+----
+* > sxample 
+1 > regexp
+3:4 > structural
+```
 
 ---
 
-Terminology
+# Terminology
 
-/[a-z0-9]+/gmi
-
----
-
-Modifiers
-
-g m i
+`/[a-z0-9]+/gmi`
 
 ---
 
-Modifiers - g = global
+```javascript Terminology
+/<pattern>/<modifiers>
 
+new RegExp("<pattern>", "<modifiers>")
+----
+* > terminology
+1[0,4] > delimeter
+1[1:3] > pattern
+1[5:7] > modifiers
+3 > the same with class
+```
+
+---
+
+`Modifiers:` g m i
+
+---
+
+```javascript Modifiers - g = global
 "hello world".replace(/o/, "x") => "hellx world"
 "hello world".replace(/o/g, "x") => "hellx wxrld"
+----
+* > example
+1 > example without modifier g
+1[4] > regexp
+1[7] > new value
+1[12] > result
+2 > example with modifier g
+2[5] > regexp
+2[13] > result
+```
 
 ---
 
-Modifiers - m = multiline
+```javascript Modifiers - m = multiline
+const value = "hello fulano\\nhello deltrano\\nhello foo\\nhello bar"
 
-"hello fulano\nhello deltrano\nhello foo\nhello bar".replace(/^(hello)\s([a-z]*)$/gm, "$1 wooow")
+value.replace(/^(hello)\s([a-z]*)$/gm, "$1 wooow")
 
----
-
-Modifiers - i = insensitive
-
-/hello\sworld/.test("Hello World") => false
-/hello\sworld/i.test("Hello World") => true
-
----
-
-Pattern
-
-\n\r\t\0[a-z][A-Z][^a-z][0-9][a-zA-Z].\s\S\d\D\w\W\v\\\.\?(...)+.?(?=!<=<!...)?*+\b\B
+// hello wooow\\nhello wooow\\nhello wooow\\nhello wooow
+----
+* > example
+1 > value
+3 > replace
+3[4] > regexp
+3[7] > new value
+5 > result
+```
 
 ---
 
-Pattern
+```javascript Modifiers - i = insensitive
+/hello\\sworld/.test("Hello World") => false
+/hello\\sworld/i.test("Hello World") => true
+----
+* > example
+1[0] > regex without modifier i
+1[4] > value
+1 > result
+2[1:4] > regex with modifier i
+2 > result
+```
 
+---
+
+`Plus Modifiers:` y u
+
+---
+
+`Tips:` áâãéêíîóôõúûç
 <Appear>
+  <div>npm install diacritics</div>
+  <div>require('diacritics').remove("Iлｔèｒｎåｔïｏｎɑｌíƶａｔï߀ԉ")</div>
+  <div>// "Internationalizati0n"</div>
+</Appear>
+
+---
+
+# Pattern
+
+`\\0[a-z][A-Z][^a-z][0-9].\\D\\w\\\.\?(...)+.?(?=!<=<!...)?*+\b\B`
+
+---
+
+<ul>
   <li>Anchor</li>
-  <li>Meta sequences</li>
-  <li>Quantifiers</li>
-  <li>Group</li>
-  <li>Characters</li>
-  <li>General Tokens</li>
- </Appear>
- 
- ---
- 
- Pattern - Anchor
- 
- ^
- $
- \b
- \B
- 
- ---
- 
- Pattern - Meta sequences
- 
- \s
- \S
- \w
- \W
- \d
- \D
- \n
- 
- ---
- 
- Pattern - Quantifiers
- 
- a*
- a+
- a{3}
- a{3,}
- a{3,6}
- a*?
- 
- ---
- 
- Pattern - Group
- 
- (a|b)
- (?:...)
- (?=...)
- (?!...)
- (?<=...)
- (?<!...)
- (?<name>...)
-  
-  ---
-  
-  Pattern - Characters
-  
-  [a]
-  [a-z]
-  [^a]
-  [^a-z]
-  [a-zA-Z]
-  
-  
+  <Appear>
+    <li>Meta-sequences</li>
+    <li>Quantifiers</li>
+    <li>Group</li>
+    <li>Characters</li>
+    <li>General Tokens</li>
+  </Appear>
+</ul>
+
+---
+
+# Pattern - Anchor 
+
+`^ $ \\b \\B`
+
+---
+
+# P - Anchor `ˆ` `$`
+
+`/^a/` => `a`aaaaaa
+
+`/a$/` => aaaaaa`a`
+
+---
+
+# Anchor `\\b` `\\B`
+
+`/a\\b/` = aaa`a` -- aaaaa -- aaaa
+
+`/a\\b/g` = aaa`a` -- aaaa`a` -- aaa`a`
+
+`/a\\B/g` = `a`aaa -- `a`aaaa -- `a`aaa
+
+
+---
+
+# Pattern - Meta sequences
+
+`\\s \\S \\w \\W \\d \\D`
+
+---
+
+# Meta sequence `\\s` `\\S`
+
+`/\\s/g` = aaaaa`_`aaaaaa`_`aaaaaaa`_`aaa
+
+`/\\S/g` = `aaaaa` `aaaaaa` `aaaaaaa` `aaa`
+
+---
+
+# Meta sequence `\\w` `\\W`
+
+`/\\w/g` = `aaaa`12345`aaaa`123123
+
+`/\\W/g` = aaaa`12345`aaaa`123123`
+
+---
+
+
+# Meta sequence `\\d` `\\D`
+
+`/\\d/g` = aaaa`12345`aaaa`123123`
+
+`/\\D/g` = `aaaa`12345`aaaa`123123
+
+---
+
+
+Pattern - Quantifiers
+
+```javascript
+a*
+a+
+a{3}
+a{3,}
+a{3,6}
+a*?
+```
+
+---
+
+Pattern - Group
+
+```javascript
+(a|b)
+(?:...)
+(?=...)
+(?!...)
+(?<=...)
+(?<!...)
+(?<name>...)
+```
+
+---
+
+Pattern - Characters
+
+```javascript
+[a]
+[a-z]
+[^a]
+[^a-z]
+[a-zA-Z]
+```
+
+
 ---
 
 Pattern - General Tokens
 
+```javascript
 \t
 \n
 \r
 \0
+```
 
 ---
 
 BOOOM
 
+```javascript
 <regex email>
-  
-  
+```
+
 --- 
 
 XRegExp
@@ -198,17 +337,3 @@ Perfomance
 ---
 
 Plus
-
-
-
- 
- 
-
-
-
-
-
-
-
-
-

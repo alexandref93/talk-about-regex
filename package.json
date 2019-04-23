@@ -1,0 +1,27 @@
+{
+  "name": "talk-about-regex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "mdx-deck deck.mdx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandref93/talk-about-regex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandref93/talk-about-regex/issues"
+  },
+  "homepage": "https://github.com/alexandref93/talk-about-regex#readme",
+  "dependencies": {
+    "grid-styled": "^5.0.2",
+    "mdx-deck": "^1.10.0",
+    "mdx-deck-code-surfer": "^0.5.5",
+    "raw-loader": "^2.0.0",
+    "styled-components": "^4.2.0"
+  }
+}
